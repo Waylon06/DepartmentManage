@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.wolfcode.rbac.dao.EmployeeMapper">
+
+    <resultMap id="EmployeeResultMap" type="cn.wolfcode.rbac.pojo.Employee">
+        <id property="id" column="id"/>
+        <result property="name" column="name"/>
+        <result property="email" column="email"/>
+        <result property="age" column="age"/>
+        <result property="admin" column="admin"/>
+        <result property="password" column="password"/>
+        <association property="dept" javaType="cn.wolfcode.rbac.pojo.Department">
+            <id column="d_id" property="id"/>
+            <result column="d_name" property="name"/>
+            <result column="sn" property="sn"/>
+        </association>
+        <collection property="roles" ofType="cn.wolfcode.rbac.pojo.Role">
+            <id column="r_id" property="id"/>
+            <result column="r_name" property="name"/>
+        </collection>
+    </resultMap>
+
+
+    <insert id="save" useGeneratedKeys="true" keyProperty="id">
+        insert
+        employee(name, email, age, dept_id) values(
+        #{name},
+        #{email},
+        #{age},
+        #{dept.id}
+        )
+    </insert>
+    <insert id="saveEmpAndRole">
+        insert into employee_role(employee_id, role_id)
+        values (#{id}, #{roleId})
+    </insert>
+
+    <update id="update">
+        update employee e
+        set e.name    = #{name},
+            e.email   = #{email},
+            e.age     = #{age},
+            e.dept_id = #{dept.id}
+        where id = #{id}
+    </update>
+
+
+    <delete id="delete">
+        delete
+        from employee
+        where id = #{id}
+    </delete>
+
+    <delete id="deleteEmpAndRole">
+        delete
+        from employee_role
+        where employee_id = #{id}
+    </delete>
+
+    <select id="selectAll" resultMap="EmployeeResultMap">
+        select e.*, d.id d_id, d.name d_name
+        from employee e,
+        department d
+        where e.dept_id = d.id
+        <if test="keyword!=null">
+            and (e.name like concat('%', #{keyword}, '%') or email like concat('%', #{keyword}, '%'))
+        </if>
+        <if test="deptId!=-1">
+            and dept_id = #{deptId}
+        </if>
+    </select>
+    <select id="selectById" resultMap="EmployeeResultMap">
+        select e.*, r.id r_id, r.name r_name, d.id d_id, d.name d_name
+        from employee e,
+             role r,
+             employee_role er,
+             department d
+        where r.id = er.role_id
+          and e.id = er.employee_id
+          and e.dept_id = d.id
+          and e.id = #{id}
+    </select>
+</mapper>

@@ -1,0 +1,136 @@
+* {
+    padding: 0;
+    margin: 0;
+}
+
+a {
+    text-decoration: none;
+}
+
+li{
+    list-style: none;
+}
+
+i {
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'icomoon';
+    src:  url('../fonts/icomoon.eot?2adm3n');
+    src:  url('../fonts/icomoon.eot?2adm3n#iefix') format('embedded-opentype'),
+    url('../fonts/icomoon.ttf?2adm3n') format('truetype'),
+    url('../fonts/icomoon.woff?2adm3n') format('woff'),
+    url('../fonts/icomoon.svg?2adm3n#icomoon') format('svg');
+    font-weight: normal;
+    font-style: normal;
+    font-display: block;
+}
+
+body {
+    background: url("../img/BackGroundImg.jpg") no-repeat;
+    background-size: cover;
+}
+
+.title {
+    margin: 130px 0 auto;
+    margin-left: 650px;
+    color: rgba(255, 255, 255, 1);
+    font-size: 36px;
+}
+
+.banner {
+    width: 440px;
+    margin: 0 auto;
+}
+
+.user,
+.password {
+    height: 60px;
+    width: 440px;
+    border-radius: 30px;
+    opacity: 0.25;
+    margin: 20px auto;
+    background-color: rgba(255, 255, 255, 1);
+    border: 1px solid rgba(255, 255, 255, 1);
+}
+
+#user,
+#password {
+    width: 370px;
+    height: 60px;
+    opacity: 0.25;
+    margin-left: 70px;
+    border-top-right-radius: 30px;
+    border-bottom-right-radius: 30px;
+    border: none;
+    outline: none;
+}
+
+.user {
+    margin-top: 80px;
+    position: relative;
+}
+
+.icon-u::before {
+    font-family: 'icomoon';
+    content: '\e971';
+    position: absolute;
+    top: 18px;
+    left: 35px;
+    font-size: 20px;
+}
+
+.password {
+    margin-bottom: 40px;
+    position: relative;
+}
+
+.icon-p::before {
+    font-family: 'icomoon';
+    content: '\e98f';
+    position: absolute;
+    top: 18px;
+    left: 35px;
+    font-size: 20px;
+}
+
+input::-webkit-input-placeholder {
+    /* color: rgba(211, 211, 211, 1); */
+    font-size: 16px;
+    font-family: SourceHanSansSC-regular;
+    opacity: 1;
+}
+
+.remember {
+    text-align: right;
+}
+
+.login {
+    height: 60px;
+    width: 440px;
+    border-radius: 30px;
+    margin-bottom: 30px;
+    font-size: 16px;
+    background-color: rgba(58, 98, 215, 1);
+    color: rgba(255, 255, 255, 1);
+    border: 1px solid rgba(58, 98, 215, 1);
+}
+
+.active-text {
+    margin-left: 20px;
+    color: rgba(211, 211, 211, 1);
+    font-size: 16px;
+}
+
+.more {
+    margin-top: 30px;
+    display: flex;
+    justify-content: space-between;
+    font-size: 18px;
+    color: rgba(211, 211, 211, 1);
+}
+
+.register,.forget {
+    cursor: pointer;
+}
